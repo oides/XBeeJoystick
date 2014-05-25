@@ -1,0 +1,2 @@
+XBeeJoystick	KEYWORD1
+readJoystick	KEYWORD2
