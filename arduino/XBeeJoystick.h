@@ -9,8 +9,12 @@
 #define NO_BUTTON_PRESSED 0
 #define BUTTON_LEFT 1
 #define BUTTON_RIGHT 2
-#define BUTTON_A 3
-#define BUTTON_B 4
+#define BUTTON_UP 3
+#define BUTTON_DOWN 4
+#define BUTTON_A 5
+#define BUTTON_B 6
+#define BUTTON_C 7
+#define BUTTON_D 8
 
 #include "Arduino.h"
 #include "XBee.h"

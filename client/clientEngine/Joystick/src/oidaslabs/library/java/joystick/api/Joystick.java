@@ -14,8 +14,24 @@ public class Joystick {
 	
 	private static final int LEFT = 1;
 	private static final int RIGHT = 2;
-	private static final int A = 3;
-	private static final int B = 4;
+	private static final int UP = 3;
+	private static final int DOWN = 4;
+	private static final int A = 5;
+	private static final int B = 6;
+	private static final int C = 7;
+	private static final int D = 8;
+	
+	public void pressUp() {
+		
+		this.pressButton(UP);	
+		
+	}
+	
+	public void pressDown() {
+		
+		this.pressButton(DOWN);	
+		
+	}
 	
 	public void pressLeft() {
 		
@@ -38,6 +54,18 @@ public class Joystick {
 	public void pressB() {
 		
 		this.pressButton(B);	
+		
+	}
+	
+	public void pressC() {
+		
+		this.pressButton(C);	
+		
+	}
+	
+	public void pressD() {
+		
+		this.pressButton(D);	
 		
 	}
 	
