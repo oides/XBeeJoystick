@@ -73,8 +73,7 @@ public class Joystick {
 		
 		try {
 			
-			TxRequest64 tx = new TxRequest64(addr64, new int[] { button });		
-			
+			TxRequest64 tx = new TxRequest64(addr64, new int[] { button });			
 			xbee.sendSynchronous(tx);
 			
 		} catch (Exception e) {
