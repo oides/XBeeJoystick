@@ -1,4 +1,4 @@
-package oidaslabs.library.java.joystick;
+package oidaslabs.library.java.joystick.clients;
 
 import oidaslabs.library.java.joystick.api.Joystick;
 
