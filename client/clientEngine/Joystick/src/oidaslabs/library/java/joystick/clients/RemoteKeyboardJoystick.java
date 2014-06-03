@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -11,19 +13,25 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import oidaslabs.library.java.joystick.api.Joystick;
-
-public class KeyboardJoystick extends JFrame implements KeyListener {
+public class RemoteKeyboardJoystick extends JFrame implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private JTextArea displayArea;
 	private JTextField typingArea;
-	private static final String newline = System.getProperty("line.separator");
 	
-	private Joystick joystick;
+	private static String server;
+	private static String port;
 
 	public static void main(String[] args) throws Exception {
 
+		if (args.length  == 2) {
+			server = args[0];
+			port = args[1];
+		} else {
+			System.out.println("Usage: java -jar Joustick.jar oidaslabs.library.java.joystick.clients.RemoteKeyboardJoystick SERVER PORT");
+			return;
+		}
+		
 		UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 		UIManager.put("swing.boldMetal", Boolean.FALSE);
 
@@ -37,7 +45,7 @@ public class KeyboardJoystick extends JFrame implements KeyListener {
 
 	private static void createAndShowGUI() {
 
-		KeyboardJoystick frame = new KeyboardJoystick("KeyboardJoystick");
+		RemoteKeyboardJoystick frame = new RemoteKeyboardJoystick("KeyboardJoystick");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.addComponentsToPane();
@@ -62,12 +70,9 @@ public class KeyboardJoystick extends JFrame implements KeyListener {
 		
 	}
 
-	public KeyboardJoystick(String name) {
+	public RemoteKeyboardJoystick(String name) {
 		
 		super(name);
-		
-		this.joystick = new Joystick();
-		joystick.openConnection("/dev/ttyUSB0", new int[] { 0x00, 0x13, 0xA2, 0x00, 0x40, 0x69, 0xDD, 0x12 });
 		
 	}
 
@@ -93,30 +98,27 @@ public class KeyboardJoystick extends JFrame implements KeyListener {
 
 		displayArea.setText(keyString);
 		
-		if (65 == keyCode) {
-			this.joystick.pressA();
-		}
-		if (66 == keyCode) {
-			this.joystick.pressB();
-		}
-		if (67 == keyCode) {
-			this.joystick.pressC();
-		}
-		if (68 == keyCode) {
-			this.joystick.pressD();
-		}
-		if (38 == keyCode) {
-			this.joystick.pressUp();
-		}
-		if (40 == keyCode) {
-			this.joystick.pressDown();
-		}
-		if (37 == keyCode) {
-			this.joystick.pressLeft();
-		}
-		if (39 == keyCode) {
-			this.joystick.pressRight();
-		}
+		execute(keyCode);
 
 	}
+	
+    private void execute(int buttonCode) {
+    	
+    	try {
+			
+    		Socket requestSocket = new Socket(this.server, Integer.parseInt(this.port));    		
+    		ObjectOutputStream out = new ObjectOutputStream(requestSocket.getOutputStream());
+    		
+    		out.writeObject(buttonCode);    		
+			out.flush();
+			
+			out.close();
+			requestSocket.close();
+    		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+    }
+
 }

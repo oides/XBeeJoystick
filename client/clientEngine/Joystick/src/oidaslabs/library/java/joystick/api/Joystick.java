@@ -104,5 +104,34 @@ public class Joystick {
 		this.xbee.close();
 		
 	}
+	
+	public void execute(int keyCode) {
+		
+		if (65 == keyCode) {
+			this.pressA();
+		}
+		if (66 == keyCode) {
+			this.pressB();
+		}
+		if (67 == keyCode) {
+			this.pressC();
+		}
+		if (68 == keyCode) {
+			this.pressD();
+		}
+		if (38 == keyCode) {
+			this.pressUp();
+		}
+		if (40 == keyCode) {
+			this.pressDown();
+		}
+		if (37 == keyCode) {
+			this.pressLeft();
+		}
+		if (39 == keyCode) {
+			this.pressRight();
+		}
+		
+	}
 
 }
