@@ -10,7 +10,6 @@ import oidaslabs.library.java.joystick.api.Joystick;
 public class JoystickServer {
 
 	public static void main(String args[]) {		
-		
 		if (args.length != 2) {
 			System.out.println("Usage: java -jar Joystick.jar oidaslabs.library.java.joystick.server.JoystickServer SOCKET_PORT XBEE_PORT");
 			return;
@@ -27,7 +26,6 @@ public class JoystickServer {
 		ServerSocket providerSocket;
 		
 		while (true) {			
-			
 			try {
 				providerSocket = new ServerSocket(Integer.parseInt(args[0]));				
 				connection = providerSocket.accept();				
@@ -47,9 +45,7 @@ public class JoystickServer {
 
 			} catch (Exception exception) {
 				exception.printStackTrace();
-			}
-			
+			}			
 		}
 	}
-
 }

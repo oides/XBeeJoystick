@@ -23,7 +23,6 @@ public class RemoteKeyboardJoystick extends JFrame implements KeyListener {
 	private static String port;
 
 	public static void main(String[] args) throws Exception {
-
 		if (args.length  == 2) {
 			server = args[0];
 			port = args[1];
@@ -39,24 +38,20 @@ public class RemoteKeyboardJoystick extends JFrame implements KeyListener {
 			public void run() {
 				createAndShowGUI();
 			}
-		});
-		
+		});		
 	}
 
 	private static void createAndShowGUI() {
-
 		RemoteKeyboardJoystick frame = new RemoteKeyboardJoystick("KeyboardJoystick");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.addComponentsToPane();
 
 		frame.pack();
-		frame.setVisible(true);
-		
+		frame.setVisible(true);		
 	}
 
 	private void addComponentsToPane() {
-
 		typingArea = new JTextField(20);
 		typingArea.addKeyListener(this);
 
@@ -66,22 +61,18 @@ public class RemoteKeyboardJoystick extends JFrame implements KeyListener {
 		scrollPane.setPreferredSize(new Dimension(375, 125));
 
 		getContentPane().add(typingArea, BorderLayout.PAGE_START);
-		getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
+		getContentPane().add(scrollPane, BorderLayout.CENTER);		
 	}
 
-	public RemoteKeyboardJoystick(String name) {
-		
-		super(name);
-		
+	public RemoteKeyboardJoystick(String name) {		
+		super(name);		
 	}
 
 	public void keyTyped(KeyEvent e) {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		executeCommand(e, "KEY PRESSED: ");
-		
+		executeCommand(e, "KEY PRESSED: ");		
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -89,7 +80,6 @@ public class RemoteKeyboardJoystick extends JFrame implements KeyListener {
 	}
 
 	private void executeCommand(KeyEvent e, String keyStatus) {
-
 		int id = e.getID();
 		String keyString;
 
@@ -99,11 +89,9 @@ public class RemoteKeyboardJoystick extends JFrame implements KeyListener {
 		displayArea.setText(keyString);
 		
 		execute(keyCode);
-
 	}
 	
-    private void execute(int buttonCode) {
-    	
+    private void execute(int buttonCode) {    	
     	try {
 			
     		Socket requestSocket = new Socket(this.server, Integer.parseInt(this.port));    		
@@ -118,7 +106,5 @@ public class RemoteKeyboardJoystick extends JFrame implements KeyListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
     }
-
 }

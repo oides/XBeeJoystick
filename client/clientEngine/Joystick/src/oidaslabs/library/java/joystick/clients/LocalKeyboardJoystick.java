@@ -23,7 +23,6 @@ public class LocalKeyboardJoystick extends JFrame implements KeyListener {
 	private static String xbeePort;
 
 	public static void main(String[] args) throws Exception {
-
 		if (args.length  == 1) {
 			xbeePort = args[0];
 		} else {
@@ -38,24 +37,20 @@ public class LocalKeyboardJoystick extends JFrame implements KeyListener {
 			public void run() {
 				createAndShowGUI();
 			}
-		});
-		
+		});		
 	}
 
 	private static void createAndShowGUI() {
-
 		LocalKeyboardJoystick frame = new LocalKeyboardJoystick("KeyboardJoystick");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.addComponentsToPane();
 
 		frame.pack();
-		frame.setVisible(true);
-		
+		frame.setVisible(true);		
 	}
 
 	private void addComponentsToPane() {
-
 		typingArea = new JTextField(20);
 		typingArea.addKeyListener(this);
 
@@ -65,25 +60,21 @@ public class LocalKeyboardJoystick extends JFrame implements KeyListener {
 		scrollPane.setPreferredSize(new Dimension(375, 125));
 
 		getContentPane().add(typingArea, BorderLayout.PAGE_START);
-		getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
+		getContentPane().add(scrollPane, BorderLayout.CENTER);		
 	}
 
-	public LocalKeyboardJoystick(String name) {
-		
+	public LocalKeyboardJoystick(String name) {		
 		super(name);
 		
 		this.joystick = new Joystick();
-		joystick.openConnection(xbeePort, new int[] { 0x00, 0x13, 0xA2, 0x00, 0x40, 0x69, 0xDD, 0x12 });
-		
+		joystick.openConnection(xbeePort, new int[] { 0x00, 0x13, 0xA2, 0x00, 0x40, 0x69, 0xDD, 0x12 });		
 	}
 
 	public void keyTyped(KeyEvent e) {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		executeCommand(e, "KEY PRESSED: ");
-		
+		executeCommand(e, "KEY PRESSED: ");		
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -91,7 +82,6 @@ public class LocalKeyboardJoystick extends JFrame implements KeyListener {
 	}
 
 	private void executeCommand(KeyEvent e, String keyStatus) {
-
 		int id = e.getID();
 		String keyString;
 
@@ -124,6 +114,5 @@ public class LocalKeyboardJoystick extends JFrame implements KeyListener {
 		if (39 == keyCode) {
 			this.joystick.pressRight();
 		}
-
 	}
 }
